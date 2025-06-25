@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anyzone - شركة الشحن</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      direction: rtl;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 360px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #1d4ed8;
+    }
+
+    .lang-switch {
+      background-color: #d1d5db;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 id="title">مرحبًا بك في Anyzone</h1>
+    <p id="subtitle">أفضل خدمة توصيل سريعة وآمنة</p>
+
+    <button class="btn" onclick="alert('دخول العميل')">تسجيل دخول العميل</button>
+    <button class="btn" onclick="alert('دخول المندوب')">تسجيل دخول المندوب</button>
+    <button class="btn" onclick="alert('لوحة الإدارة')">لوحة التحكم</button>
+
+    <button class="btn lang-switch" onclick="toggleLang()">English</button>
+  </div>
+
+  <script>
+    let lang = "ar";
+
+    function toggleLang() {
+      if (lang === "ar") {
+        lang = "en";
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
+        document.getElementById("title").textContent = "Welcome to Anyzone";
+        document.getElementById("subtitle").textContent = "Fast & Secure Delivery Service";
+        document.querySelectorAll(".btn")[0].textContent = "Client Login";
+        document.querySelectorAll(".btn")[1].textContent = "Driver Login";
+        document.querySelectorAll(".btn")[2].textContent = "Admin Panel";
+        document.querySelector(".lang-switch").textContent = "عربي";
+      } else {
+        lang = "ar";
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+        document.getElementById("title").textContent = "مرحبًا بك في Anyzone";
+        document.getElementById("subtitle").textContent = "أفضل خدمة توصيل سريعة وآمنة";
+        document.querySelectorAll(".btn")[0].textContent = "تسجيل دخول العميل";
+        document.querySelectorAll(".btn")[1].textContent = "تسجيل دخول المندوب";
+        document.querySelectorAll(".btn")[2].textContent = "لوحة التحكم";
+        document.querySelector(".lang-switch").textContent = "English";
+      }
+    }
+  </script>
+
+</body>
+</html>

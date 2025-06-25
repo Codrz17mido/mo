@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل عميل - Anyzone</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 360px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #374151;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>تسجيل عميل جديد</h2>
+    <form onsubmit="submitForm(event)">
+      <label for="name">الاسم الكامل</label>
+      <input type="text" id="name" required>
+
+      <label for="phone">رقم الهاتف</label>
+      <input type="tel" id="phone" required>
+
+      <label for="address">العنوان</label>
+      <textarea id="address" rows="2" required></textarea>
+
+      <label for="package">نوع الطرد</label>
+      <select id="package" required>
+        <label for="package">نوع الطرد</label>
+<select id="package" required>
+  <option value="">-- اختر نوع الطرد --</option>
+  <option>صندوق</option>
+  <option>مستندات</option>
+  <option>ملابس</option>
+  <option>إلكترونيات</option>
+  <option>أجهزة منزلية</option>
+  <option>كتب</option>
+  <option>مواد غذائية</option>
+  <option>منتجات تجميل</option>
+  <option>أخرى</option>
+</select>
+      <button type="submit">إرسال الطلب</button>
+    </form>
+  </div>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      alert("تم إرسال طلبك بنجاح! ✅");
+      // هنا في النسخة الكاملة ممكن نبعته لسيرفر أو قاعدة بيانات
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة التحكم - Anyzone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1f2937;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #374151;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .order-box {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .login {
+      width: 360px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- تسجيل دخول الأدمن -->
+  <div class="container login" id="adminLogin">
+    <h2>تسجيل دخول الإدارة</h2>
+    <label for="adminUser">اسم المستخدم</label>
+    <input type="text" id="adminUser" placeholder="admin">
+
+    <label for="adminPass">كلمة المرور</label>
+    <input type="password" id="adminPass" placeholder="••••••">
+
+    <button onclick="adminLogin()">دخول</button>
+  </div>
+
+  <!-- لوحة التحكم -->
+  <div class="container" id="adminPanel" style="display:none;">
+    <h2>لوحة التحكم - الطلبات</h2>
+    <div id="ordersList"></div>
+  </div>
+
+  <script>
+    // بيانات طلبات وهمية
+    let orders = [
+      { id: "O1001", client: "أحمد", address: "القاهرة", status: "قيد المعالجة", driver: "" },
+      { id: "O1002", client: "سارة", address: "المنصورة", status: "جاري التوصيل", driver: "d200" },
+      { id: "O1003", client: "محمود", address: "الزقازيق", status: "في الانتظار", driver: "" }
+    ];
+
+    function adminLogin() {
+      const user = document.getElementById("adminUser").value.trim();
+      const pass = document.getElementById("adminPass").value.trim();
+
+      if (user === "admin" && pass === "1234") {
+        document.getElementById("adminLogin").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        loadOrders();
+      } else {
+        alert("بيانات الدخول غير صحيحة");
+      }
+    }
+
+    function loadOrders() {
+      const list = document.getElementById("ordersList");
+      list.innerHTML = "";
+
+      orders.forEach((order, index) => {
+        list.innerHTML += `
+          <div class="order-box">
+            <p><strong>رقم الطلب:</strong> ${order.id}</p>
+            <p><strong>العميل:</strong> ${order.client}</p>
+            <p><strong>العنوان:</strong> ${order.address}</p>
+
+            <label>تعيين لمندوب:</label>
+            <input type="text" value="${order.driver}" id="driver-${index}" placeholder="مثال: d100">
+
+            <label>تحديث الحالة:</label>
+            <select id="status-${index}">
+              <option ${order.status === "قيد المعالجة" ? "selected" : ""}>قيد المعالجة</option>
+              <option ${order.status === "في الانتظار" ? "selected" : ""}>في الانتظار</option>
+              <option ${order.status === "جاري التوصيل" ? "selected" : ""}>جاري التوصيل</option>
+              <option ${order.status === "تم التوصيل" ? "selected" : ""}>تم التوصيل</option>
+              <option ${order.status === "ملغي" ? "selected" : ""}>ملغي</option>
+            </select>
+
+            <button onclick="saveOrder(${index})">حفظ التعديلات</button>
+          </div>
+        `;
+      });
+    }
+
+    function saveOrder(index) {
+      const newDriver = document.getElementById(`driver-${index}`).value;
+      const newStatus = document.getElementById(`status-${index}`).value;
+      orders[index].driver = newDriver;
+      orders[index].status = newStatus;
+      alert("تم تحديث الطلب بنجاح ✅");
+    }
+  </script>
+
+</body>
+</html>

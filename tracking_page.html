@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تتبع الطلب - Anyzone</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      direction: rtl;
+    }
+
+    .tracker-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 360px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+
+    .status-box {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #065f46;
+      background-color: #d1fae5;
+      padding: 10px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .error {
+      color: #b91c1c;
+      background-color: #fee2e2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tracker-box">
+    <h2>تتبع حالة الطلب</h2>
+    <input type="text" id="orderId" placeholder="ادخل رقم الطلب">
+    <button onclick="trackOrder()">تتبع</button>
+    <div id="statusBox" class="status-box"></div>
+  </div>
+
+  <script>
+    // مثال بيانات وهمية للعرض فقط
+    const mockOrders = {
+      "12345": "جاري التوصيل",
+      "67890": "تم التوصيل بنجاح",
+      "11111": "تم إلغاء الطلب",
+      "22222": "جارٍ تجهيز الشحنة"
+    };
+
+    function trackOrder() {
+      const id = document.getElementById("orderId").value.trim();
+      const statusBox = document.getElementById("statusBox");
+
+      if (mockOrders[id]) {
+        statusBox.className = "status-box";
+        statusBox.textContent = "حالة الطلب: " + mockOrders[id];
+        statusBox.style.display = "block";
+      } else {
+        statusBox.className = "status-box error";
+        statusBox.textContent = "لم يتم العثور على الطلب.";
+        statusBox.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دخول المندوب - Anyzone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 380px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1f2937;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #374151;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .order-list {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .order-item {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .order-item span {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .logout {
+      margin-top: 15px;
+      background-color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="loginForm">
+    <h2>دخول المندوب</h2>
+    <label for="driverId">رقم المندوب</label>
+    <input type="text" id="driverId" placeholder="مثال: d100" required>
+
+    <button onclick="login()">دخول</button>
+  </div>
+
+  <div class="container order-list" id="ordersSection">
+    <h2>طلباتك الحالية</h2>
+    <div id="orders"></div>
+    <button class="logout" onclick="logout()">تسجيل الخروج</button>
+  </div>
+
+  <script>
+    const dummyOrders = {
+      d100: [
+        { id: "O123", client: "أحمد محمد", address: "القاهرة - مدينة نصر", status: "جاري التوصيل" },
+        { id: "O124", client: "منى عبدالسلام", address: "الجيزة - فيصل", status: "تم الاستلام" }
+      ],
+      d200: [
+        { id: "O125", client: "سارة علي", address: "الإسكندرية - سموحة", status: "جاري التجهيز" }
+      ]
+    };
+
+    function login() {
+      const driverId = document.getElementById("driverId").value.trim();
+      const orders = dummyOrders[driverId];
+
+      if (orders) {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("ordersSection").style.display = "block";
+
+        const ordersContainer = document.getElementById("orders");
+        ordersContainer.innerHTML = "";
+
+        orders.forEach(order => {
+          ordersContainer.innerHTML += `
+            <div class="order-item">
+              <span><strong>رقم الطلب:</strong> ${order.id}</span>
+              <span><strong>العميل:</strong> ${order.client}</span>
+              <span><strong>العنوان:</strong> ${order.address}</span>
+              <span><strong>الحالة:</strong> ${order.status}</span>
+            </div>
+          `;
+        });
+      } else {
+        alert("رقم المندوب غير صحيح أو لا توجد طلبات.");
+      }
+    }
+
+    function logout() {
+      document.getElementById("ordersSection").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
